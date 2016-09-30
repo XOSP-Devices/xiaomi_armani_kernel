@@ -1109,7 +1109,7 @@ static int mdp3_parse_bootarg(struct platform_device *pdev)
 	cmd_len = strlen(cmd_line);
 	disp_idx = strnstr(cmd_line, "mdss_mdp.panel=", cmd_len);
 	if (!disp_idx) {
-		pr_err("%s:%d:cmdline panel not set disp_idx=[%p]\n",
+		pr_err("%s:%d:cmdline panel not set disp_idx=[%pK]\n",
 				__func__, __LINE__, disp_idx);
 		memset(panel_name, 0x00, MDSS_MAX_PANEL_LEN);
 		*intf_type = MDSS_PANEL_INTF_INVALID;
@@ -1129,7 +1129,7 @@ static int mdp3_parse_bootarg(struct platform_device *pdev)
 	}
 
 	if (end_idx <= disp_idx) {
-		pr_err("%s:%d:cmdline pan incorrect end=[%p] disp=[%p]\n",
+		pr_err("%s:%d:cmdline pan incorrect end=[%pK] disp=[%pK]\n",
 			__func__, __LINE__, end_idx, disp_idx);
 		memset(panel_name, 0x00, MDSS_MAX_PANEL_LEN);
 		*intf_type = MDSS_PANEL_INTF_INVALID;
@@ -1841,7 +1841,7 @@ static int mdp3_alloc(struct msm_fb_data_type *mfd)
 		pr_err("fail to map to IOMMU %d\n", ret);
 		return ret;
 	}
-	pr_info("allocating %u bytes at %p (%lx phys) for fb %d\n",
+	pr_info("allocating %u bytes at %pK (%lx phys) for fb %d\n",
 		size, virt, phys, mfd->index);
 
 	mfd->fbi->screen_base = virt;
